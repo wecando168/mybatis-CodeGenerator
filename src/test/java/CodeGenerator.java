@@ -18,10 +18,10 @@ import static com.wwt.robot.core.ProjectConstant.*;
  */
 public class CodeGenerator {
     //JDBC数据库连接配置，请修改项目的实际配置
-    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/wwtclrobot";
+    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/wwtclrobot?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8";
     private static final String JDBC_USERNAME = "root";
     private static final String JDBC_PASSWORD = "123456";
-    private static final String JDBC_DIVER_CLASS_NAME = "com.mysql.jdbc.Driver";
+    private static final String JDBC_DIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
 
     //项目在硬盘上的基础路径，这个自动获取
     private static final String PROJECT_PATH = System.getProperty("user.dir");
@@ -45,7 +45,7 @@ public class CodeGenerator {
     private static final String DATE = new SimpleDateFormat("yyyy/MM/dd").format(new Date());
 
     public static void main(String[] args) {
-        String arr[] = {
+        String[] arr = {
                 "Goods",
         };
         genCode(arr);
@@ -61,8 +61,8 @@ public class CodeGenerator {
     public static void genCode(String... tableNames) {
         for (String tableName : tableNames) {
             genCodeByCustomModelName(tableName, null);
-            genService(tableName,null);
-            genEntityForm(tableName,null);
+            genService(tableName, null);
+            genEntityForm(tableName, null);
         }
     }
 
@@ -80,7 +80,7 @@ public class CodeGenerator {
         genController(tableName, modelName);
     }
 
-    public static void genModelAndMapper(String tableName, String modelName)  {
+    public static void genModelAndMapper(String tableName, String modelName) {
         Context context = new Context(ModelType.FLAT);
         context.setId("Potato");
         context.setTargetRuntime("MyBatis3Simple");
@@ -101,7 +101,7 @@ public class CodeGenerator {
 
         JavaModelGeneratorConfiguration javaModelGeneratorConfiguration = new JavaModelGeneratorConfiguration();
         javaModelGeneratorConfiguration.setTargetProject(PROJECT_PATH + JAVA_PATH);
-        javaModelGeneratorConfiguration.setTargetPackage(MODEL_PACKAGE + "." + toLowerCaseFirstOne(tableNameConvertUpperCamel(tableName))+".entity");
+        javaModelGeneratorConfiguration.setTargetPackage(MODEL_PACKAGE + "." + toLowerCaseFirstOne(tableNameConvertUpperCamel(tableName)) + ".entity");
         context.setJavaModelGeneratorConfiguration(javaModelGeneratorConfiguration);
 
         //生成"xxxxMapper.xml文件路径的相关配置"
@@ -113,7 +113,7 @@ public class CodeGenerator {
         //生成"xxxxMapper.java接口文件路径的相关配置"
         JavaClientGeneratorConfiguration javaClientGeneratorConfiguration = new JavaClientGeneratorConfiguration();
         javaClientGeneratorConfiguration.setTargetProject(PROJECT_PATH + JAVA_PATH);
-        javaClientGeneratorConfiguration.setTargetPackage(MAPPER_PACKAGE + "." + toLowerCaseFirstOne(tableNameConvertUpperCamel(tableName))+".mapper");
+        javaClientGeneratorConfiguration.setTargetPackage(MAPPER_PACKAGE + "." + toLowerCaseFirstOne(tableNameConvertUpperCamel(tableName)) + ".mapper");
         javaClientGeneratorConfiguration.setConfigurationType("XMLMAPPER");
         context.setJavaClientGeneratorConfiguration(javaClientGeneratorConfiguration);
 
@@ -132,7 +132,7 @@ public class CodeGenerator {
 
             boolean overwrite = true;
             DefaultShellCallback callback = new DefaultShellCallback(overwrite);
-            warnings = new ArrayList<String>();
+            warnings = new ArrayList<>();
             generator = new MyBatisGenerator(config, callback, warnings);
             generator.generate(null);
         } catch (Exception e) {
@@ -170,7 +170,12 @@ public class CodeGenerator {
             //生成ext
             File file = new File(PROJECT_PATH + JAVA_PATH + PACKAGE_PATH_SERVICE + "/" + toLowerCaseFirstOne(tableNameConvertUpperCamel(tableName)) + "/dao/ext/" + modelNameUpperCamel + "DaoExt.java");
             if (!file.getParentFile().exists()) {
-                file.getParentFile().mkdirs();
+                boolean mkdirs = file.getParentFile().mkdirs();
+                if (mkdirs) {
+                    System.out.println(modelNameUpperCamel + "创建文件夹成功");
+                } else {
+                    System.out.println(modelNameUpperCamel + "创建文件夹失败");
+                }
             }
             cfg.getTemplate("entityExt.ftl").process(data,
                     new FileWriter(file));
@@ -179,7 +184,12 @@ public class CodeGenerator {
             //生成Dao
             File file1 = new File(PROJECT_PATH + JAVA_PATH + PACKAGE_PATH_SERVICE + "/" + toLowerCaseFirstOne(tableNameConvertUpperCamel(tableName)) + "/dao/" + modelNameUpperCamel + "Dao.java");
             if (!file1.getParentFile().exists()) {
-                file1.getParentFile().mkdirs();
+                boolean mkdirs = file1.getParentFile().mkdirs();
+                if (mkdirs) {
+                    System.out.println(modelNameUpperCamel + "创建文件夹成功");
+                } else {
+                    System.out.println(modelNameUpperCamel + "创建文件夹失败");
+                }
             }
             cfg.getTemplate("dao.ftl").process(data,
                     new FileWriter(file1));
@@ -188,7 +198,12 @@ public class CodeGenerator {
             //生成DaoImpl
             File file2 = new File(PROJECT_PATH + JAVA_PATH + PACKAGE_PATH_SERVICE + "/" + toLowerCaseFirstOne(tableNameConvertUpperCamel(tableName)) + "/dao/impl/" + modelNameUpperCamel + "DaoImpl.java");
             if (!file2.getParentFile().exists()) {
-                file2.getParentFile().mkdirs();
+                boolean mkdirs = file2.getParentFile().mkdirs();
+                if (mkdirs) {
+                    System.out.println(modelNameUpperCamel + "创建文件夹成功");
+                } else {
+                    System.out.println(modelNameUpperCamel + "创建文件夹失败");
+                }
             }
             cfg.getTemplate("dao-impl.ftl").process(data,
                     new FileWriter(file2));
@@ -217,7 +232,12 @@ public class CodeGenerator {
 
             File file = new File(PROJECT_PATH + JAVA_PATH + PACKAGE_PATH_SERVICE + "/" + toLowerCaseFirstOne(tableNameConvertUpperCamel(tableName)) + "/service/" + modelNameUpperCamel + "Service.java");
             if (!file.getParentFile().exists()) {
-                file.getParentFile().mkdirs();
+                boolean mkdirs = file.getParentFile().mkdirs();
+                if (mkdirs) {
+                    System.out.println(modelNameUpperCamel + "创建文件夹成功");
+                } else {
+                    System.out.println(modelNameUpperCamel + "创建文件夹失败");
+                }
             }
             cfg.getTemplate("service.ftl").process(data,
                     new FileWriter(file));
@@ -225,7 +245,12 @@ public class CodeGenerator {
             System.out.println(PROJECT_PATH + JAVA_PATH + PACKAGE_PATH_SERVICE_IMPL);
             File file1 = new File(PROJECT_PATH + JAVA_PATH + PACKAGE_PATH_SERVICE_IMPL + "/" + toLowerCaseFirstOne(tableNameConvertUpperCamel(tableName)) + "/service/impl/" + modelNameUpperCamel + "ServiceImpl.java");
             if (!file1.getParentFile().exists()) {
-                file1.getParentFile().mkdirs();
+                boolean mkdirs = file1.getParentFile().mkdirs();
+                if (mkdirs) {
+                    System.out.println(modelNameUpperCamel + "创建文件夹成功");
+                } else {
+                    System.out.println(modelNameUpperCamel + "创建文件夹失败");
+                }
             }
             cfg.getTemplate("service-impl.ftl").process(data,
                     new FileWriter(file1));
@@ -237,6 +262,7 @@ public class CodeGenerator {
 
     /**
      * 生成FORM
+     *
      * @param tableName
      * @param modelName
      */
@@ -257,7 +283,12 @@ public class CodeGenerator {
 
             File file = new File(PROJECT_PATH + JAVA_PATH + PACKAGE_PATH_SERVICE + "/" + toLowerCaseFirstOne(tableNameConvertUpperCamel(tableName)) + "/entity/" + modelNameUpperCamel + "Form.java");
             if (!file.getParentFile().exists()) {
-                file.getParentFile().mkdirs();
+                boolean mkdirs = file.getParentFile().mkdirs();
+                if (mkdirs) {
+                    System.out.println(modelNameUpperCamel + "创建文件夹成功");
+                } else {
+                    System.out.println(modelNameUpperCamel + "创建文件夹失败");
+                }
             }
             cfg.getTemplate("entityForm.ftl").process(data,
                     new FileWriter(file));
@@ -282,7 +313,12 @@ public class CodeGenerator {
 
             File file = new File(PROJECT_PATH + JAVA_PATH + PACKAGE_PATH_CONTROLLER + "/controller/front/web/" + modelNameUpperCamel + "Controller.java");
             if (!file.getParentFile().exists()) {
-                file.getParentFile().mkdirs();
+                boolean mkdirs = file.getParentFile().mkdirs();
+                if (mkdirs) {
+                    System.out.println(modelNameUpperCamel + "创建文件夹成功");
+                } else {
+                    System.out.println(modelNameUpperCamel + "创建文件夹失败");
+                }
             }
             //cfg.getTemplate("controller-restful.ftl").process(data, new FileWriter(file));
             cfg.getTemplate("controller.ftl").process(data, new FileWriter(file));
