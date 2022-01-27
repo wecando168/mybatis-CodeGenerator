@@ -5,13 +5,13 @@ mybatis-CodeGenerator 功能介绍
 
 mybatis-CodeGenerator 代码生成器软件架构
 
-一、项目主模块resources资源文件说明
+# 一、项目主模块resources资源文件说明
 
 1、application.properties
 
     spring中服务器连接的相关设置(参数可通过配置数据库连接后自动更新)
 
-二、项目主模块java部分说明
+# 二、项目主模块java部分说明
 
 1、core模块
 
@@ -36,8 +36,8 @@ mybatis-CodeGenerator 代码生成器软件架构
 6、web模块
 
     B/S结构的表示层，主要用于在浏览器中显示数据，提供用户接口
-    
-三、项目主模块com.wwt.robot.core包基础类功能划分
+
+# 三、项目主模块com.wwt.robot.core包基础类功能划分
 
 1、Mapper.java
 
@@ -47,7 +47,7 @@ mybatis-CodeGenerator 代码生成器软件架构
 
     项目常量，主要用于指定自动生成文件存储位置
 
-四、项目主模块com.wwt.robot.common包基础类功能划分
+# 四、项目主模块com.wwt.robot.common包基础类功能划分
 
 1、exception部分结构
 
@@ -130,7 +130,7 @@ mybatis-CodeGenerator 代码生成器软件架构
 
         实现接口IBaseController和IQueryDao
 
-五、Test模块resources资源文件说明
+# 五、Test模块resources资源文件说明
 
 1、generator/template文件夹
 
@@ -174,7 +174,7 @@ CodeGenerator为生成自动代码的主程序，里面很多目录的设置依�
 
 确保能够生成文件之后，再调整输出文件位置的相关配置，确保符合你的实际需求，最后根据输出结果，修改template下的模板文件，满足你自己的额外需求
 
-mybatis-CodeGenerator 参与贡献
+# mybatis-CodeGenerator 参与贡献
 
 1. Fork 本仓库
 2. 新建 Feat_xxx 分支
