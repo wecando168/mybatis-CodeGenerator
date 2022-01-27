@@ -17,23 +17,23 @@ mybatis-CodeGenerator 代码生成器软件架构
 
     项目核心
 
-1、common模块
+2、common模块
 
     通用模块，不依赖其它任何模块，主要有utils、可以在多个不同项目中共用的内容
 
-2、entitie模块
+3、entitie模块
 
     POJO、VO、DTO
 
-3、dao模块
+4、dao模块
 
     数据持久化，访问数据库，这里使用Mybatis
 
-4、service模块
+5、service模块
 
     业务模块，处理业务逻辑
 
-5、web模块
+6、web模块
 
     B/S结构的表示层，主要用于在浏览器中显示数据，提供用户接口
     
