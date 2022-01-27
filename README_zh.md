@@ -13,27 +13,23 @@ mybatis-CodeGenerator 代码生成器软件架构
 
 # 二、项目主模块java部分说明
 
-1、core模块：项目核心
+**1、core模块：**项目核心
 
-2、common模块：通用模块，不依赖其它任何模块，主要有utils、可以在多个不同项目中共用的内容
+**2、common模块：**通用模块，不依赖其它任何模块，主要有utils、可以在多个不同项目中共用的内容
 
-3、entitie模块：POJO、VO、DTO
+**3、entitie模块：**POJO、VO、DTO
 
-4、dao模块：数据持久化，访问数据库，这里使用Mybatis
+**4、dao模块：**数据持久化，访问数据库，这里使用Mybatis
 
-5、service模块：业务模块，处理业务逻辑
+**5、service模块：**业务模块，处理业务逻辑
 
-6、web模块：B/S结构的表示层，主要用于在浏览器中显示数据，提供用户接口
+**6、web模块：**B/S结构的表示层，主要用于在浏览器中显示数据，提供用户接口
 
 # 三、项目主模块com.wwt.robot.core包基础类功能划分
 
-1、Mapper.java
+**1、Mapper.java**定制版MyBatis Mapper插件接口
 
-    定制版MyBatis Mapper插件接口
-
-2、ProjectConstant.java
-
-    项目常量，主要用于指定自动生成文件存储位置
+**2、ProjectConstant.java**项目常量，主要用于指定自动生成文件存储位置
 
 # 四、项目主模块com.wwt.robot.common包基础类功能划分
 
