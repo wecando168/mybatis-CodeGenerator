@@ -162,7 +162,7 @@ mybatis-CodeGenerator 使用说明
  
 4. 运行CodeGenerator将自动生成你所需要的几个模块
 
-mybatis-CodeGenerator 功能移植
+# 七、mybatis-CodeGenerator 功能移植
 
 ProjectConstant.java里面主要是默认目录的设置
 
